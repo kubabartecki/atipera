@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  github-scanner:
+    container_name: github-scanner
+    build:
+      context: ./github-scanner
+      dockerfile: ./Dockerfile
+    environment:
+      - GITHUB_TOKEN=
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - atipera_network
+
+networks:
+  atipera_network:
+    driver: bridge
