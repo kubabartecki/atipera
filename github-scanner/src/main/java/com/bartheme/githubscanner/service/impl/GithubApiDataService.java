@@ -60,7 +60,7 @@ public class GithubApiDataService implements GithubDataService {
     public Flux<GithubApiBranchResponse> getGithubRepositoryBranches(GithubApiRepositoryResponse githubRepository) {
         return fetchBranches(
                 UriComponentsBuilder.fromUriString("/repos/{owner}/{repositoryName}/branches")
-                        .queryParam("per_page", "10")
+                        .queryParam("per_page", "100")
                         .build(githubRepository.getOwnerLogin(), githubRepository.getName())
                         .toString()
         );
