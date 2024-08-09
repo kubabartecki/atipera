@@ -6,6 +6,7 @@ import com.bartheme.githubscanner.model.github.GithubApiRepositoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class GithubScannerService {
                                 .ownerLogin(githubRepository.getOwnerLogin())
                                 .branches(branches)
                                 .build())
+                        .subscribeOn(Schedulers.parallel())
         );
     }
 }
