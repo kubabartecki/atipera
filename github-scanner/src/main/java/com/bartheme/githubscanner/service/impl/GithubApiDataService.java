@@ -61,7 +61,7 @@ public class GithubApiDataService implements GithubDataService {
         return fetchBranches(
                 UriComponentsBuilder.fromUriString("/repos/{owner}/{repositoryName}/branches")
                         .queryParam("per_page", "100")
-                        .build(githubRepository.getOwnerLogin(), githubRepository.getName())
+                        .build(githubRepository.ownerLogin(), githubRepository.name())
                         .toString()
         );
     }
