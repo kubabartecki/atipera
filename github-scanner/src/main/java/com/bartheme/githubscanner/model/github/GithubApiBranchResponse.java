@@ -1,18 +1,8 @@
 package com.bartheme.githubscanner.model.github;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import com.bartheme.githubscanner.model.github.deserializer.GithubApiBranchResponseDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.Map;
-
-@Data
-public class GithubApiBranchResponse {
-    private String name;
-    private String lastCommitSha;
-
-    @SuppressWarnings("unchecked")
-    @JsonProperty("commit")
-    private void unpackNestedCommit(Map<String, Object> commit) {
-        this.lastCommitSha = (String) commit.get("sha");
-    }
+@JsonDeserialize(using = GithubApiBranchResponseDeserializer.class)
+public record GithubApiBranchResponse(String name, String lastCommitSha) {
 }

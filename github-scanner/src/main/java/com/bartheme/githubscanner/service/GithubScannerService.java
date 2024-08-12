@@ -6,6 +6,7 @@ import com.bartheme.githubscanner.model.github.GithubApiRepositoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 @RequiredArgsConstructor
@@ -19,15 +20,16 @@ public class GithubScannerService {
         return githubApiRepositoryResponse.flatMap(githubRepository ->
                 githubDataService.getGithubRepositoryBranches(githubRepository)
                         .map(githubBranch -> BranchDto.builder()
-                                .name(githubBranch.getName())
-                                .lastCommitSha(githubBranch.getLastCommitSha())
+                                .name(githubBranch.name())
+                                .lastCommitSha(githubBranch.lastCommitSha())
                                 .build())
                         .collectList()
                         .map(branches -> RepositoryDto.builder()
-                                .name(githubRepository.getName())
-                                .ownerLogin(githubRepository.getOwnerLogin())
+                                .name(githubRepository.name())
+                                .ownerLogin(githubRepository.ownerLogin())
                                 .branches(branches)
                                 .build())
+                        .subscribeOn(Schedulers.parallel())
         );
     }
 }

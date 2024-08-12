@@ -3,6 +3,7 @@ package com.bartheme.githubscanner.controller;
 import com.bartheme.githubscanner.model.RepositoryDto;
 import com.bartheme.githubscanner.service.GithubScannerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class GithubScannerController {
 
     private final GithubScannerService githubScannerService;
 
-    @GetMapping(value = "{username}/repositories", produces = "application/json")
+    @GetMapping(value = "{username}/repositories", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<RepositoryDto> getUserRepositories(@PathVariable("username") String username) {
         return githubScannerService.getUserRepositories(username);
     }

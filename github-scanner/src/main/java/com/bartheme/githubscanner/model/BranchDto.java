@@ -1,11 +1,7 @@
 package com.bartheme.githubscanner.model;
 
 import lombok.Builder;
-import lombok.Data;
 
-@Data
 @Builder
-public class BranchDto {
-    private String name;
-    private String lastCommitSha;
+public record BranchDto(String name, String lastCommitSha) {
 }

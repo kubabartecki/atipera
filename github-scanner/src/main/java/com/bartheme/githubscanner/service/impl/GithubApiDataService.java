@@ -6,6 +6,7 @@ import com.bartheme.githubscanner.model.github.GithubApiRepositoryResponse;
 import com.bartheme.githubscanner.service.GithubDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -24,12 +25,15 @@ public class GithubApiDataService implements GithubDataService {
     private static final Pattern NEXT_LINK_PATTERN = Pattern.compile("(?<=<)([\\S]*)(?=>; rel=\"next\")");
     private final WebClient webClient;
 
+    @Value("${github.api.url.per_page}")
+    private String perPage;
+
     @Override
     public Flux<GithubApiRepositoryResponse> getGithubUserRepositories(String username) {
         return fetchRepos(
                 UriComponentsBuilder.fromUriString("/users/{username}/repos")
                         .queryParam("type", "all")
-                        .queryParam("per_page", "100")
+                        .queryParam("per_page", perPage)
                         .build(username)
                         .toString()
         );
@@ -60,8 +64,8 @@ public class GithubApiDataService implements GithubDataService {
     public Flux<GithubApiBranchResponse> getGithubRepositoryBranches(GithubApiRepositoryResponse githubRepository) {
         return fetchBranches(
                 UriComponentsBuilder.fromUriString("/repos/{owner}/{repositoryName}/branches")
-                        .queryParam("per_page", "10")
-                        .build(githubRepository.getOwnerLogin(), githubRepository.getName())
+                        .queryParam("per_page", perPage)
+                        .build(githubRepository.ownerLogin(), githubRepository.name())
                         .toString()
         );
     }
