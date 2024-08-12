@@ -1,0 +1,20 @@
+[
+  {
+    "name": "EisenhowerToDo",
+    "ownerLogin": "kubabartecki",
+    "branches": [
+      {
+        "name": "master",
+        "lastCommitSha": "16c4facc1b66746d782db8f565bea35d9414eb70"
+      },
+      {
+        "name": "master2",
+        "lastCommitSha": "16c4facc1b66746d782db8f565bea35d9414eb70"
+      },
+      {
+        "name": "master3",
+        "lastCommitSha": "16c4facc1b66746d782db8f565bea35d9414eb70"
+      }
+    ]
+  }
+]
