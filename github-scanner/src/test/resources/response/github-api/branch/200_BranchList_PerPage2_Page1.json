@@ -1,0 +1,18 @@
+[
+  {
+    "name": "master",
+    "commit": {
+      "sha": "16c4facc1b66746d782db8f565bea35d9414eb70",
+      "url": "https://api.github.com/repos/kubabartecki/AoC/commits/16c4facc1b66746d782db8f565bea35d9414eb70"
+    },
+    "protected": false
+  },
+  {
+    "name": "master2",
+    "commit": {
+      "sha": "16c4facc1b66746d782db8f565bea35d9414eb70",
+      "url": "https://api.github.com/repos/kubabartecki/AoC/commits/16c4facc1b66746d782db8f565bea35d9414eb70"
+    },
+    "protected": false
+  }
+]
